@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的待办</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部区域 -->
+        <header class="header">
+            <h1>我的待办</h1>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">全部</button>
+                <button class="filter-btn" data-filter="active">未完成</button>
+                <button class="filter-btn" data-filter="completed">已完成</button>
+            </div>
+        </header>
+
+        <!-- 新增待办区域 -->
+        <div class="add-todo">
+            <input type="text" id="todoInput" placeholder="输入待办内容，按回车快速添加" maxlength="200">
+            <button id="addBtn" disabled>添加</button>
+        </div>
+
+        <!-- 待办列表区域 -->
+        <ul id="todoList" class="todo-list"></ul>
+
+        <!-- 空状态 -->
+        <div id="emptyState" class="empty-state">
+            暂无待办，添加第一个任务吧😊
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
