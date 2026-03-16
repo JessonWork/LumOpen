@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>舆情AI - 舆情监测</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <span class="text-xl font-bold text-blue-600">舆情AI系统</span>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="index.html" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-b-2 px-1 pt-1 inline-flex items-center text-sm font-medium">工作台</a>
+                        <a href="monitor.html" class="border-blue-500 text-blue-600 border-b-2 px-1 pt-1 inline-flex items-center text-sm font-medium">舆情监测</a>
+                        <a href="competitor.html" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-b-2 px-1 pt-1 inline-flex items-center text-sm font-medium">竞品分析</a>
+                        <a href="intervention.html" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-b-2 px-1 pt-1 inline-flex items-center text-sm font-medium">干预效果</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <!-- 采集配置 -->
+        <div class="bg-white shadow rounded-lg mb-8">
+            <div class="px-4 py-5 sm:px-6 border-b border-gray-200">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">采集配置</h3>
+            </div>
+            <div class="px-4 py-5 sm:p-6">
+                <form class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                    <div class="sm:col-span-3">
+                        <label class="block text-sm font-medium text-gray-700">监测关键词</label>
+                        <textarea rows="4" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="每行一个关键词，最多100个
+XX品牌
+XX产品
+XX功能"></textarea>
+                    </div>
+                    <div class="sm:col-span-3">
+                        <label class="block text-sm font-medium text-gray-700">采集渠道</label>
+                        <div class="mt-2 space-y-2">
+                            <div class="flex items-center">
+                                <input type="checkbox" checked class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                                <label class="ml-2 block text-sm text-gray-700">豆包</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" checked class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                                <label class="ml-2 block text-sm text-gray-700">文心一言</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" checked class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                                <label class="ml-2 block text-sm text-gray-700">通义千问</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" checked class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                                <label class="ml-2 block text-sm text-gray-700">Claude</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" checked class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                                <label class="ml-2 block text-sm text-gray-700">GPT</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" checked class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                                <label class="ml-2 block text-sm text-gray-700">秘塔搜索</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" checked class="h-4 w-4 text-blue-600 border-gray-300 rounded">
+                                <label class="ml-2 block text-sm text-gray-700">360AI搜索</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700">采集频率</label>
+                        <select class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
+                            <option>30分钟/次</option>
+                            <option>1小时/次</option>
+                            <option>2小时/次</option>
+                            <option>4小时/次</option>
+                        </select>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700">风险词库</label>
+                        <textarea rows="2" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="漏洞
+投诉
+虚假宣传"></textarea>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700">&nbsp;</label>
+                        <button type="button" class="mt-1 w-full bg-blue-600 border border-transparent rounded-md py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">保存配置</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- 识别结果列表 -->
+        <div class="bg-white shadow rounded-lg">
+            <div class="px-4 py-5 sm:px-6 border-b border-gray-200 flex justify-between items-center">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">识别结果</h3>
+                <div class="flex space-x-2">
+                    <button type="button" class="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">导出</button>
+                    <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">刷新</button>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">内容</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">情感分类</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">风险等级</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">来源</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">采集时间</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-6 py-4 text-sm text-gray-900 max-w-md truncate">XX品牌的产品使用体验非常好，功能齐全，服务也很到位，推荐大家购买。</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-green-600">正向</td>
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">低风险</span></td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">豆包</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2026-03-17 07:00</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 text-sm text-gray-900 max-w-md truncate">XX产品存在严重的安全漏洞，用户信息可能泄露，建议大家谨慎使用。</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-red-600">负面</td>
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">高风险</span></td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">GPT-4o</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2026-03-17 07:00</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 text-sm text-gray-900 max-w-md truncate">XX品牌最近推出了新的功能，看起来还不错，不知道实际使用效果怎么样。</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">中性</td>
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-100 text-gray-800">低风险</span></td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">通义千问</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2026-03-17 07:00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

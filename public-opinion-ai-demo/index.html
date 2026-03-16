@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>舆情AI - 工作台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+</head>
+<body class="bg-gray-50">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <span class="text-xl font-bold text-blue-600">舆情AI系统</span>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="index.html" class="border-blue-500 text-blue-600 border-b-2 px-1 pt-1 inline-flex items-center text-sm font-medium">工作台</a>
+                        <a href="monitor.html" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-b-2 px-1 pt-1 inline-flex items-center text-sm font-medium">舆情监测</a>
+                        <a href="competitor.html" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-b-2 px-1 pt-1 inline-flex items-center text-sm font-medium">竞品分析</a>
+                        <a href="intervention.html" class="border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 border-b-2 px-1 pt-1 inline-flex items-center text-sm font-medium">干预效果</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+        <!-- 统计卡片 -->
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="bg-white overflow-hidden shadow rounded-lg">
+                <div class="p-5">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <span class="text-3xl font-bold text-red-600">12</span>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate">高风险舆情</dt>
+                                <dd class="text-xs text-red-600">↑ 3 较昨日</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white overflow-hidden shadow rounded-lg">
+                <div class="p-5">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <span class="text-3xl font-bold text-yellow-600">35</span>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate">中风险舆情</dt>
+                                <dd class="text-xs text-yellow-600">↓ 2 较昨日</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white overflow-hidden shadow rounded-lg">
+                <div class="p-5">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <span class="text-3xl font-bold text-green-600">289</span>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate">正向舆情</dt>
+                                <dd class="text-xs text-green-600">↑ 25 较昨日</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white overflow-hidden shadow rounded-lg">
+                <div class="p-5">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <span class="text-3xl font-bold text-blue-600">92.3%</span>
+                        </div>
+                        <div class="ml-5 w-0 flex-1">
+                            <dl>
+                                <dt class="text-sm font-medium text-gray-500 truncate">干预成功率</dt>
+                                <dd class="text-xs text-blue-600">↑ 1.2% 较上周</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 图表 -->
+        <div class="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-2">
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h3 class="text-lg font-medium text-gray-900 mb-4">近7天舆情趋势</h3>
+                <canvas id="trendChart" height="200"></canvas>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h3 class="text-lg font-medium text-gray-900 mb-4">舆情情感分布</h3>
+                <canvas id="sentimentChart" height="200"></canvas>
+            </div>
+        </div>
+
+        <!-- 待处理舆情列表 -->
+        <div class="mt-8 bg-white shadow rounded-lg">
+            <div class="px-4 py-5 sm:px-6 border-b border-gray-200">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">待处理舆情</h3>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">标题</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">风险等级</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">来源</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">发现时间</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">XX产品被曝存在安全漏洞</td>
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">高风险</span></td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">GPT-4o</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2026-03-17 07:02</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-600 hover:text-blue-900"><a href="#">处理</a></td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">用户反馈XX功能体验差</td>
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">中风险</span></td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">文心一言</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2026-03-17 06:45</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-600 hover:text-blue-900"><a href="#">处理</a></td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">竞品XX发布新产品功能</td>
+                            <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">中风险</span></td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">360AI搜索</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2026-03-17 06:30</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-blue-600 hover:text-blue-900"><a href="#">处理</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 趋势图
+        const trendCtx = document.getElementById('trendChart').getContext('2d');
+        new Chart(trendCtx, {
+            type: 'line',
+            data: {
+                labels: ['3.11', '3.12', '3.13', '3.14', '3.15', '3.16', '3.17'],
+                datasets: [
+                    { label: '高风险', data: [8, 7, 10, 9, 11, 9, 12], borderColor: '#dc2626', backgroundColor: 'rgba(220, 38, 38, 0.1)', tension: 0.3 },
+                    { label: '中风险', data: [32, 38, 34, 40, 37, 33, 35], borderColor: '#d97706', backgroundColor: 'rgba(217, 119, 6, 0.1)', tension: 0.3 },
+                    { label: '正向', data: [220, 245, 230, 260, 270, 265, 289], borderColor: '#16a34a', backgroundColor: 'rgba(22, 163, 74, 0.1)', tension: 0.3 }
+                ]
+            }
+        });
+
+        // 情感分布图
+        const sentimentCtx = document.getElementById('sentimentChart').getContext('2d');
+        new Chart(sentimentCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['正向', '中性', '负面'],
+                datasets: [{
+                    data: [65, 20, 15],
+                    backgroundColor: ['#16a34a', '#6b7280', '#dc2626']
+                }]
+            }
+        });
+    </script>
+</body>
+</html>
